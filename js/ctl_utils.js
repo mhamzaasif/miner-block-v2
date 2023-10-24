@@ -124,6 +124,7 @@ function getHeightOfIOSToolbars() {
 
 function sizeHandler() {
 	window.scrollTo(0, 1);
+
 	if (!$("#canvas")){
 		return;
 	}
@@ -138,9 +139,7 @@ function sizeHandler() {
         }
         
         var w = getSize("Width");
-        
-         _checkOrientation(w,h);
-         
+
 	var multiplier = Math.min((h / CANVAS_HEIGHT), (w / CANVAS_WIDTH));
 
 	var destW = CANVAS_WIDTH * multiplier;
@@ -186,37 +185,29 @@ function sizeHandler() {
         if(s_oInterface !== null){
             s_oInterface.refreshButtonPos( s_iOffsetX,s_iOffsetY);
         }
+        
         if(s_oMenu !== null){
             s_oMenu.refreshButtonPos( s_iOffsetX,s_iOffsetY);
         }
+        
         if(s_oLevelMenu !== null){
             s_oLevelMenu.refreshButtonPos( s_iOffsetX,s_iOffsetY);
         }
         
-	if(s_bMobile){
-            $("#canvas").css("width",destW+"px");
-            $("#canvas").css("height",destH+"px");
-        }else{
-            s_oStage.canvas.width = destW;
-            s_oStage.canvas.height = destH;
-
-            var iScale = Math.min(destW / CANVAS_WIDTH, destH / CANVAS_HEIGHT);
-            s_oStage.scaleX = s_oStage.scaleY = iScale;
-        }
-
+	$("#canvas").css("width",destW+"px");
+	$("#canvas").css("height",destH+"px");
+        
         if(fOffsetY < 0){
-           // $("#canvas").css("top",fOffsetY+"px");
-            $("#canvas").css("top","0px");
-
+            $("#canvas").css("top",fOffsetY+"px");
         }else{
             $("#canvas").css("top","0px");
         }
-
-        //$("#canvas").css("left",fOffsetX+"px");
-        $("#canvas").css("left","28%");
-
+        
+        $("#canvas").css("left",fOffsetX+"px");
 
 };
+
+
 
 function _checkOrientation(iWidth,iHeight){
     if(s_bMobile && ENABLE_CHECK_ORIENTATION){
